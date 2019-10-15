@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports.hello = async event => {
+  console.log("hello was called")
   let message = 'Hello World!'
   const name = event.queryStringParameters && event.queryStringParameters.name;
   if(name !== null) {
@@ -10,7 +11,7 @@ module.exports.hello = async event => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: message,
+        message: message + '\nTesting logging to cloudwatch',
         input: event,
       },
       null,
