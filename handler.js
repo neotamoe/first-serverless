@@ -1,18 +1,54 @@
 'use strict';
 
 module.exports.hello = async event => {
+  let message = 'Hello World!'
+  const name = event.queryStringParameters && event.queryStringParameters.name;
+  if(name !== null) {
+    message = `Hello ${name}!`
+  }
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'Hello Serverless!  This is my first serverless project.  The function executed successfully!',
+        message: message,
         input: event,
       },
       null,
       2
     ),
   };
+};
 
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+module.exports.hola = async event => {
+  let message = 'Hola Mundo!'
+  const name = event.pathParameters && event.pathParameters.name;
+  if(name !== null) {
+    message = `Hola ${name}!`
+  }
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: message,
+        input: event,
+      },
+      null,
+      2
+    ),
+  };
+};
+
+module.exports.annyoung = async event => {
+  const body = JSON.parse(event.body);
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: body,
+        input: event,
+      },
+      null,
+      2
+    ),
+  };
 };
